@@ -1,0 +1,11 @@
+.container {
+    min-height: 200vh;
+    height: auto;
+    margin: 0;
+}
+
+.example-icon{
+  min-width: 60px;
+  justify-content: center;
+  justify-items: center;
+}
