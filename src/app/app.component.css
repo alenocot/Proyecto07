@@ -5,7 +5,9 @@
 }
 
 .example-icon{
-  min-width: 60px;
-  justify-content: center;
-  justify-items: center;
+  min-width: 80px;
+}
+
+.example-icon-font{
+  font-size: 150%;
 }
