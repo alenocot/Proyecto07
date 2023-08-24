@@ -4,12 +4,12 @@ module.exports = function(sequelize, DataTypes) {
     PK_idLista: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       primaryKey: true
     },
     idUsuario: {
       type: DataTypes.STRING(10),
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'cliente',
         key: 'PK_idUsuario'
@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     nombre: {
       type: DataTypes.STRING(50),
-      allowNull: false
+      allowNull: true
     },
     creation_date: {
       type: DataTypes.DATE,

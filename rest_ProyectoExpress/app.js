@@ -19,6 +19,8 @@ var clienteRouter = require('./routes/rest_cliente');
 var listacompraRouter = require('./routes/rest_listacompra');
 var productoRouter = require('./routes/rest_producto');
 var supermercadoRouter = require('./routes/rest_supermercado');
+var lista_compras_productosRouter = require('./routes/rest_lista_compras_productos');
+
 
 var app = express();
 
@@ -41,6 +43,8 @@ app.use('/rest/cliente', clienteRouter);
 app.use('/rest/listacompra', listacompraRouter);
 app.use('/rest/producto', productoRouter);
 app.use('/rest/supermercado', supermercadoRouter);
+app.use('/rest/lista_compras_productos', lista_compras_productosRouter);
+
 
 /* CONFIGURACIÓN DE LA RUTA A LA DOCUMENTACIÓN */
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
