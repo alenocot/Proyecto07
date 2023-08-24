@@ -6,7 +6,6 @@ const Producto = require('../models').producto;
 
 router.get('/findAll/json', function(req, res, next) {  
 
-/* MÉTODO ESTÁTICO findAll  */
 Producto.findAll({  
       attributes: { exclude: ["updatedAt", "createdAt"] } ,
     })  
@@ -16,7 +15,6 @@ Producto.findAll({
     .catch(error => res.status(400).send(error)) 
 });
 
-/* MÉTODO ESTÁTICO findbyID  */
 router.get('/findById/:id/json', function(req, res, next) {  
 
     let id = req.params.id;
@@ -32,6 +30,56 @@ router.get('/findById/:id/json', function(req, res, next) {
         .catch(error => res.status(400).send(error))
 });
 
-/* MÉTODO ESTÁTICO deletebyID  */
+router.post('/save', function(req, res, next){
+  Producto.create(req.body)
+  .then(instancia => {
+    res.status(201).json(instancia);
+  })
+  .catch(error => {
+    res.status(500).json({error: 'Error al crear el registro'});
+  })
+});
+
+router.put('/update/:id', function(req, res, next){
+
+  let id = req.params.id;
+
+  Producto.findByPk(id)
+  .then(instancia => {
+    if(instancia){
+      instancia.update(req.body)
+      .then(instanciaActualizada => {
+        res.status(201).json(instanciaActualizada);
+      })
+      .catch(error =>{
+        res.status(500).json({error : 'Error al actualizar'});
+      })
+    }else{
+      res.status(400).json({error: 'No existe el registro'});
+    }
+  })
+  .catch(error => res.status(400).send(error))
+});
+
+router.delete('/delete/:id', function(req, res, next){
+
+  let id = req.params.id;
+
+  Producto.findByPk(id)
+  .then(instancia => {
+    if(instancia){
+      instancia.destroy()
+      .then(() => {
+        res.status(204).json({ mensaje: 'Registro eliminado'})
+      })
+      .catch(error => {
+        res.status(500).json({error : 'Error al actualizar'})
+      });
+    }else{
+      res.status(404).json({error: 'No existe registro'})
+    }
+  })
+  .catch(error => res.status(400).send(error))
+})
 
 module.exports = router;
