@@ -21,7 +21,6 @@ var productoRouter = require('./routes/rest_producto');
 var supermercadoRouter = require('./routes/rest_supermercado');
 var lista_compras_productosRouter = require('./routes/rest_lista_compras_productos');
 
-
 var app = express();
 
 // view engine setup

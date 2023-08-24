@@ -6,12 +6,12 @@
     "description": ""
   },
   "host": "localhost:3000",
-  "basePath": "/",
+  "basePath": "/rest",
   "schemes": [
     "http"
   ],
   "paths": {
-    "/findAll/json": {
+    "/categoria/findAll/json": {
       "get": {
         "description": "",
         "responses": {
@@ -24,7 +24,7 @@
         }
       }
     },
-    "/findById/{id}/json": {
+    "/categoria/findById/{id}/json": {
       "get": {
         "description": "",
         "parameters": [
@@ -48,8 +48,21 @@
         }
       }
     },
-    "/deleteById/{id}/json": {
-      "get": {
+    "/categoria/save": {
+      "post": {
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/categoria/update/{id}": {
+      "put": {
         "description": "",
         "parameters": [
           {
@@ -60,14 +73,41 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/categoria/delete/{id}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
           },
           "400": {
             "description": "Bad Request"
           },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
