@@ -1,20 +1,20 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('lista_compras_productos', {
-    list_id: {
+    idLista: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'shopping_lists',
-        key: 'PK_list_id'
+        model: 'listacompra',
+        key: 'PK_idLista'
       }
     },
-    producto_id: {
+    idProducto: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'productos',
-        key: 'PK_producto_id'
+        model: 'producto',
+        key: 'PK_idProducto'
       }
     }
   }, {
@@ -23,17 +23,17 @@ module.exports = function(sequelize, DataTypes) {
     timestamps: false,
     indexes: [
       {
-        name: "list_id",
+        name: "idLista",
         using: "BTREE",
         fields: [
-          { name: "list_id" },
+          { name: "idLista" },
         ]
       },
       {
-        name: "producto_id",
+        name: "idProducto",
         using: "BTREE",
         fields: [
-          { name: "producto_id" },
+          { name: "idProducto" },
         ]
       },
     ]

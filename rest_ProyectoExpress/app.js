@@ -10,16 +10,17 @@ const swaggerUi = require('swagger-ui-express')
 /* REFERENCIA AL ARCHIVO GENERADO */
 const swaggerFile = require('./swagger_output.json')
 
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
  /* REFERENCIA AL MANEJADOR DE RUTAS */
-var comprasRouter = require('./routes/rest_compras');
 var categoriaRouter = require('./routes/rest_categoria');
+var clienteRouter = require('./routes/rest_cliente');
+var listacompraRouter = require('./routes/rest_listacompra');
+var productoRouter = require('./routes/rest_producto');
+var supermercadoRouter = require('./routes/rest_supermercado');
 
 var app = express();
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,8 +36,11 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 /* RELACIÓN ENTRE LA RUTA DEL URL CON LA REFERENCIA CON EL MANEJADOR DE RUTAS */
-app.use('/rest/compras', comprasRouter);
 app.use('/rest/categoria', categoriaRouter);
+app.use('/rest/cliente', clienteRouter);
+app.use('/rest/listacompra', listacompraRouter);
+app.use('/rest/producto', productoRouter);
+app.use('/rest/supermercado', supermercadoRouter);
 
 /* CONFIGURACIÓN DE LA RUTA A LA DOCUMENTACIÓN */
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))

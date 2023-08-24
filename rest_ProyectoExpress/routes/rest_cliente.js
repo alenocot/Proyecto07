@@ -2,12 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 /* IMPORTE El ARCHIVO CON EL NOMBRE_CLASE */
-const Categoria = require('../models').categoria;
+const Cliente = require('../models').cliente;
 
 router.get('/findAll/json', function(req, res, next) {  
 
 /* MÉTODO ESTÁTICO findAll  */
-Categoria.findAll({  
+Cliente.findAll({  
       attributes: { exclude: ["updatedAt", "createdAt"] } ,
     })  
     .then(resultado => {  
@@ -21,7 +21,7 @@ router.get('/findById/:id/json', function(req, res, next) {
 
     let id = req.params.id;
 
-    Categoria.findByPk(id)
+    Cliente.findByPk(id)
         .then(instancia => {
           if(instancia) {
             res.status(200).json(instancia);

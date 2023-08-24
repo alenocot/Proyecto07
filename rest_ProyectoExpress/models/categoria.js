@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('categoria', {
-    PK_categoria_id: {
+    PK_idCategoria: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "PK_categoria_id" },
+          { name: "PK_idCategoria" },
         ]
       },
     ]

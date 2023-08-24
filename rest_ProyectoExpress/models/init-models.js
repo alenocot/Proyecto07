@@ -1,37 +1,37 @@
 var DataTypes = require("sequelize").DataTypes;
 var _categoria = require("./categoria");
 var _lista_compras_productos = require("./lista_compras_productos");
-var _productos = require("./productos");
-var _shopping_lists = require("./shopping_lists");
-var _supermercados = require("./supermercados");
-var _users = require("./users");
+var _producto = require("./producto");
+var _listacompra = require("./listacompra");
+var _supermercado = require("./supermercado");
+var _cliente = require("./cliente");
 
 function initModels(sequelize) {
   var categoria = _categoria(sequelize, DataTypes);
   var lista_compras_productos = _lista_compras_productos(sequelize, DataTypes);
-  var productos = _productos(sequelize, DataTypes);
-  var shopping_lists = _shopping_lists(sequelize, DataTypes);
-  var supermercados = _supermercados(sequelize, DataTypes);
-  var users = _users(sequelize, DataTypes);
+  var producto = _producto(sequelize, DataTypes);
+  var listacompra = _listacompra(sequelize, DataTypes);
+  var supermercado = _supermercado(sequelize, DataTypes);
+  var cliente = _cliente(sequelize, DataTypes);
 
-  productos.belongsTo(categoria, { as: "category_categorium", foreignKey: "category"});
-  categoria.hasMany(productos, { as: "productos", foreignKey: "category"});
-  lista_compras_productos.belongsTo(productos, { as: "producto", foreignKey: "producto_id"});
-  productos.hasMany(lista_compras_productos, { as: "lista_compras_productos", foreignKey: "producto_id"});
-  lista_compras_productos.belongsTo(shopping_lists, { as: "list", foreignKey: "list_id"});
-  shopping_lists.hasMany(lista_compras_productos, { as: "lista_compras_productos", foreignKey: "list_id"});
-  productos.belongsTo(supermercados, { as: "supermarket", foreignKey: "supermarket_id"});
-  supermercados.hasMany(productos, { as: "productos", foreignKey: "supermarket_id"});
-  shopping_lists.belongsTo(users, { as: "user", foreignKey: "user_id"});
-  users.hasMany(shopping_lists, { as: "shopping_lists", foreignKey: "user_id"});
+  producto.belongsTo(categoria, { as: "categoria_categorium", foreignKey: "categoria"});
+  categoria.hasMany(producto, { as: "producto", foreignKey: "categoria"});
+  lista_compras_productos.belongsTo(producto, { as: "producto", foreignKey: "idProducto"});
+  producto.hasMany(lista_compras_productos, { as: "lista_compras_productos", foreignKey: "idProducto"});
+  lista_compras_productos.belongsTo(listacompra, { as: "list", foreignKey: "idLista"});
+  listacompra.hasMany(lista_compras_productos, { as: "lista_compras_productos", foreignKey: "idLista"});
+  producto.belongsTo(supermercado, { as: "supermercado", foreignKey: "idSupermercado"});
+  supermercado.hasMany(producto, { as: "producto", foreignKey: "idSupermercado"});
+  listacompra.belongsTo(cliente, { as: "cliente", foreignKey: "idCliente"});
+  cliente.hasMany(listacompra, { as: "listacompra", foreignKey: "idCliente"});
 
   return {
     categoria,
     lista_compras_productos,
-    productos,
-    shopping_lists,
-    supermercados,
-    users,
+    producto,
+    listacompra,
+    supermercado,
+    cliente,
   };
 }
 module.exports = initModels;

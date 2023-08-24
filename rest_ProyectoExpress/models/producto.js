@@ -1,43 +1,43 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('productos', {
-    PK_producto_id: {
+  return sequelize.define('producto', {
+    PK_idProducto: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    product_name: {
+    nombre: {
       type: DataTypes.STRING(100),
       allowNull: false
     },
-    category: {
+    categoria: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'categoria',
-        key: 'PK_categoria_id'
+        key: 'PK_idCategoria'
       }
     },
-    price: {
+    precio: {
       type: DataTypes.DECIMAL(6,2),
       allowNull: false
     },
-    barcode: {
+    codigoBarras: {
       type: DataTypes.CHAR(13),
       allowNull: true
     },
-    supermarket_id: {
+    idSupermercado: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'supermercados',
-        key: 'PK_supermarket_id'
+        model: 'supermercado',
+        key: 'PK_idSupermercado'
       }
     }
   }, {
     sequelize,
-    tableName: 'productos',
+    tableName: 'producto',
     timestamps: false,
     indexes: [
       {
@@ -45,21 +45,21 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "PK_producto_id" },
+          { name: "PK_idProducto" },
         ]
       },
       {
-        name: "supermarket_id",
+        name: "idSupermercado",
         using: "BTREE",
         fields: [
-          { name: "supermarket_id" },
+          { name: "idSupermercado" },
         ]
       },
       {
-        name: "category",
+        name: "categoria",
         using: "BTREE",
         fields: [
-          { name: "category" },
+          { name: "categoria" },
         ]
       },
     ]
