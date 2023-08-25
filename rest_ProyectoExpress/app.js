@@ -6,9 +6,13 @@ var logger = require('morgan');
 
 /* REFERENCIA AL MÓDULO */
 const swaggerUi = require('swagger-ui-express')
+var cors = require('cors')
 
 /* REFERENCIA AL ARCHIVO GENERADO */
 const swaggerFile = require('./swagger_output.json')
+
+const dotenv = require('dotenv');
+dotenv.config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -21,11 +25,19 @@ var productoRouter = require('./routes/rest_producto');
 var supermercadoRouter = require('./routes/rest_supermercado');
 var lista_compras_productosRouter = require('./routes/rest_lista_compras_productos');
 
+var authenticateJWT = require('./middleware/auth');
+
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+/* MIDDLEWARE CORS */
+app.use(cors());
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -37,7 +49,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 /* RELACIÓN ENTRE LA RUTA DEL URL CON LA REFERENCIA CON EL MANEJADOR DE RUTAS */
-app.use('/rest/categoria', categoriaRouter);
+app.use('/rest/categoria', authenticateJWT, categoriaRouter);
 app.use('/rest/cliente', clienteRouter);
 app.use('/rest/listacompra', listacompraRouter);
 app.use('/rest/producto', productoRouter);
